@@ -19,7 +19,7 @@
         <assertj.version>3.26.3</assertj.version>
         <allure.version>2.29.0</allure.version>
         <aspectj.version>1.9.22.1</aspectj.version>
-        <jackson.version>2.18.1</jackson.version>
+        <jackson.version>2.18.11</jackson.version>
 
         <!-- какие теги запускать: api, ui или оба (по умолчанию) -->
         <groups>api | ui</groups>
