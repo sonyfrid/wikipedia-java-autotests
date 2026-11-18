@@ -11,13 +11,22 @@ import static com.codeborne.selenide.Selenide.$$;
 
 /** Главная страница и поле поиска в шапке (одинаковое на всех страницах Vector 2022). */
 public class MainPage {
-    // после загрузки Vue пересоздаёт поле без id, поэтому ищем видимое поле поиска по name
-    private final SelenideElement searchInput = $$("input.cdx-text-input__input[name=search]").findBy(visible);
+    // после загрузки Vue пересоздаёт поле без id, а на узком экране или в старой разметке поле другое:
+    // берём любое видимое поле поиска по name, а свёрнутое сначала раскрываем значком лупы
+    private final SelenideElement searchInput = $$("input[name=search]").findBy(visible);
+    private final ElementsCollection searchToggle = $$("a.search-toggle, button.search-toggle, #p-search > a");
     private final ElementsCollection suggestions = $$(".cdx-typeahead-search__menu .cdx-menu-item");
 
     @Step("Открыть главную страницу Википедии ({lang})")
     public MainPage open(String lang) {
         com.codeborne.selenide.Selenide.open(Config.baseUrl(lang) + "/wiki/Main_Page");
+        if (!$$("input[name=search]").filter(visible).isEmpty()) {
+            return this;
+        }
+        SelenideElement toggle = searchToggle.findBy(visible);
+        if (toggle.exists()) {
+            toggle.click();
+        }
         searchInput.shouldBe(visible);
         return this;
     }
