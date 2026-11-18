@@ -22,7 +22,7 @@ jobs:
         run: mvn -B -Papi test
       - name: Allure results
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: allure-results-api
           path: target/allure-results
@@ -41,7 +41,7 @@ jobs:
         run: mvn -B -Pui test
       - name: Allure results и скриншоты
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: allure-results-ui
           path: |
