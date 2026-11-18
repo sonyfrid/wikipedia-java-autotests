@@ -1,0 +1,9 @@
+target/
+allure-results/
+allure-report/
+.allure/
+build/
+*.log
+.idea/
+*.iml
+.vscode/

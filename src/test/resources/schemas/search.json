@@ -1,0 +1,23 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Wikipedia search results",
+  "type": "object",
+  "required": ["pages"],
+  "properties": {
+    "pages": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "key", "title", "excerpt"],
+        "properties": {
+          "id": {"type": "integer", "minimum": 1},
+          "key": {"type": "string", "minLength": 1},
+          "title": {"type": "string", "minLength": 1},
+          "excerpt": {"type": ["string", "null"]},
+          "description": {"type": ["string", "null"]},
+          "thumbnail": {"type": ["object", "null"]}
+        }
+      }
+    }
+  }
+}

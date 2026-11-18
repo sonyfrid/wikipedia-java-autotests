@@ -1,0 +1,26 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Wikipedia bare page",
+  "type": "object",
+  "required": ["id", "key", "title", "latest", "content_model", "license", "html_url"],
+  "properties": {
+    "id": {"type": "integer", "minimum": 1},
+    "key": {"type": "string"},
+    "title": {"type": "string"},
+    "latest": {
+      "type": "object",
+      "required": ["id", "timestamp"],
+      "properties": {
+        "id": {"type": "integer", "minimum": 1},
+        "timestamp": {"type": "string"}
+      }
+    },
+    "content_model": {"type": "string"},
+    "license": {
+      "type": "object",
+      "required": ["url", "title"],
+      "properties": {"url": {"type": "string"}, "title": {"type": "string"}}
+    },
+    "html_url": {"type": "string", "pattern": "^https://"}
+  }
+}

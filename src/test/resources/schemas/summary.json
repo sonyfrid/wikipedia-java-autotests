@@ -1,0 +1,52 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Wikipedia page summary",
+  "type": "object",
+  "required": ["type", "title", "pageid", "lang", "dir", "extract", "titles", "content_urls", "revision", "timestamp"],
+  "properties": {
+    "type": {"enum": ["standard", "disambiguation", "mainpage", "no-extract"]},
+    "title": {"type": "string", "minLength": 1},
+    "pageid": {"type": "integer", "minimum": 1},
+    "lang": {"type": "string", "pattern": "^[a-z-]{2,12}$"},
+    "dir": {"enum": ["ltr", "rtl"]},
+    "extract": {"type": "string"},
+    "wikibase_item": {"type": "string", "pattern": "^Q[0-9]+$"},
+    "titles": {
+      "type": "object",
+      "required": ["canonical", "normalized", "display"],
+      "properties": {
+        "canonical": {"type": "string"},
+        "normalized": {"type": "string"},
+        "display": {"type": "string"}
+      }
+    },
+    "content_urls": {
+      "type": "object",
+      "required": ["desktop", "mobile"],
+      "properties": {
+        "desktop": {"$ref": "#/definitions/urls"},
+        "mobile": {"$ref": "#/definitions/urls"}
+      }
+    },
+    "thumbnail": {"$ref": "#/definitions/image"},
+    "originalimage": {"$ref": "#/definitions/image"},
+    "revision": {"type": "string", "pattern": "^[0-9]+$"},
+    "timestamp": {"type": "string"}
+  },
+  "definitions": {
+    "urls": {
+      "type": "object",
+      "required": ["page"],
+      "properties": {"page": {"type": "string", "pattern": "^https://"}}
+    },
+    "image": {
+      "type": "object",
+      "required": ["source", "width", "height"],
+      "properties": {
+        "source": {"type": "string", "pattern": "^https://"},
+        "width": {"type": "integer", "minimum": 1},
+        "height": {"type": "integer", "minimum": 1}
+      }
+    }
+  }
+}
